@@ -1,0 +1,73 @@
+use empresaDB
+
+db.clientes.insertMany([
+  { nome: "Ana Lima", idade: 22, cidade: "Salvador", interesses: ["viagem", "música"], dataCadastro: new Date() },
+  { nome: "Bruno Souza", idade: 28, cidade: "São Paulo", interesses: ["esportes", "tecnologia"], dataCadastro: new Date() },
+  { nome: "Carla Nunes", idade: 35, cidade: "Rio de Janeiro", interesses: ["culinária", "leitura"], dataCadastro: new Date() },
+  { nome: "Diego Alves", idade: 41, cidade: "Curitiba", interesses: ["corrida", "viagem"], dataCadastro: new Date() },
+  { nome: "Eduarda Reis", idade: 30, cidade: "Belo Horizonte", interesses: ["cinema", "música"], dataCadastro: new Date() },
+  { nome: "Felipe Mendes", idade: 27, cidade: "Porto Alegre", interesses: ["games", "esportes"], dataCadastro: new Date() },
+  { nome: "Gabriela Costa", idade: 45, cidade: "Fortaleza", interesses: ["fotografia", "viagem"], dataCadastro: new Date() },
+  { nome: "Henrique Santos", idade: 33, cidade: "Salvador", interesses: ["carros", "música"], dataCadastro: new Date() },
+  { nome: "Isabela Rocha", idade: 29, cidade: "Campinas", interesses: ["arte", "leitura"], dataCadastro: new Date() },
+  { nome: "João Pedro", idade: 40, cidade: "São Paulo", interesses: ["esportes", "culinária"], dataCadastro: new Date() },
+  { nome: "Karen Silva", idade: 24, cidade: "Niterói", interesses: ["moda", "viagem"], dataCadastro: new Date() },
+  { nome: "Lucas Martins", idade: 38, cidade: "Brasília", interesses: ["música", "fotografia"], dataCadastro: new Date() },
+  { nome: "Mariana Oliveira", idade: 31, cidade: "Salvador", interesses: ["tecnologia", "games"], dataCadastro: new Date() },
+  { nome: "Natália Dias", idade: 26, cidade: "Santos", interesses: ["viagem", "arte"], dataCadastro: new Date() },
+  { nome: "Otávio Lima", idade: 36, cidade: "Recife", interesses: ["esportes", "corrida"], dataCadastro: new Date() },
+  { nome: "Paula Freitas", idade: 42, cidade: "Curitiba", interesses: ["música", "moda"], dataCadastro: new Date() },
+  { nome: "Rafael Gomes", idade: 30, cidade: "Belo Horizonte", interesses: ["viagem", "cinema"], dataCadastro: new Date() },
+  { nome: "Sofia Almeida", idade: 25, cidade: "Fortaleza", interesses: ["fotografia", "games"], dataCadastro: new Date() },
+  { nome: "Thiago Lima", idade: 37, cidade: "São Paulo", interesses: ["corrida", "tecnologia"], dataCadastro: new Date() },
+  { nome: "Vanessa Torres", idade: 34, cidade: "Rio de Janeiro", interesses: ["arte", "viagem"], dataCadastro: new Date() }
+])
+
+
+4-
+db.clientes.find({ idade: { $eq: 30 } })
+
+5-
+db.clientes.find({ idade: { $ne: 25 } })
+
+6- 
+
+
+db.clientes.find({
+  $or: [
+    { idade: { $gt: 40 } },
+    { idade: { $lt: 30 } }
+  ]
+})
+
+
+7-
+
+db.clientes.find({ idade: { $gte: 25, $lte: 35 } })
+
+8-
+
+db.clientes.find({ interesses: { $in: ["viagem", "esportes"] } })
+
+9-
+
+db.clientes.updateOne(
+  { nome: "Ana Lima" },
+  { $set: { nome: "Ana Lima Souza" } }
+)
+
+db.clientes.updateOne(
+  { nome: "Bruno Souza" },
+  { $inc: { idade: 5 } }
+)
+
+10-
+
+db.clientes.aggregate([
+  { $group: { _id: null, mediaIdade: { $avg: "$idade" } } }
+])
+
+
+db.clientes.aggregate([
+  { $project: { _id: 0, nome: 1, idade: 1 } }
+])
